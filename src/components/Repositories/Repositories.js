@@ -12,8 +12,9 @@ import {
   OptionType
 } from './style'
 import Repository from '../Repository/Repository'
+import { connect } from 'react-redux'
 
-export default function Repositories ({ language, repositories }) {
+function Repositories ({ userRepos }) {
   return (
     <Container>
       <DivTitle>
@@ -24,9 +25,9 @@ export default function Repositories ({ language, repositories }) {
           <InputText />
           <SelectType>
             <OptionType>All</OptionType>
-            {language.map(lang => (
-              <OptionType key={lang.id} value={lang.id}>
-                {lang.name}
+            {userRepos.map(({ id, primaryLanguage }) => (
+              <OptionType key={id} value={id}>
+                {primaryLanguage.name}
               </OptionType>
             ))}
           </SelectType>
@@ -34,10 +35,19 @@ export default function Repositories ({ language, repositories }) {
         </Form>
       </DivBusca>
       <Repos>
-        {repositories.map(repository => (
-          <Repository key={repository.name} repository={repository} />
+        {userRepos.map(repository => (
+          <Repository key={repository.id} repository={repository} />
         ))}
       </Repos>
     </Container>
   )
 }
+
+const mapStateToProps = state => ({
+  userRepos: state.repositories.userRepos
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(Repositories)
