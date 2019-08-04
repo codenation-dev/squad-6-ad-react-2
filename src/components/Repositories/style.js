@@ -18,22 +18,43 @@ export const DivBusca = styled.div`
 
 export const Form = styled.main`
   display: flex;
-  flex-wrap: wrap;
+  /* flex: 1 1 auto; */
+  /* justify-content: space-evenly; */
+  padding: 16px 0;
   width: 100%;
 `
 
 export const InputText = styled.input`
-  display: flex;
-  margin: 10px;
-  font-size: 25px;
-  line-height: 35px;
-  flex: 1 1 200px;
+  background-color: #fff;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  color: #24292e;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0 10px;
+  padding: 6px 8px;
+  vertical-align: middle;
+  width: 400px;
+
+  :focus {
+    border-color: #2188ff;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075),
+      0 0 0 0.2em rgba(3, 102, 214, 0.3);
+  }
 `
 
 export const SelectType = styled.select`
-  display: flex;
-  margin: 10px;
+  background-color: #eff3f6;
+  background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  border-radius: 0.25em;
+  color: #24292e;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 10px;
   min-width: 100px;
+  padding: 6px 12px;
 
   :hover {
     cursor: pointer;
@@ -60,9 +81,29 @@ export const SpanButton = styled.span`
   }
 `
 
-export const Repos = styled.div`
+export const Repos = styled.ul``
+
+export const Menu = styled.nav`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
 `
 
-export const H2 = styled.h2``
+export const Link = styled.a`
+  border: 2px solid transparent;
+  border-bottom-color: ${props => (props.repo ? '#e36209' : '')};
+  color: #586069;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: ${props => (props.repo ? '600' : '')};
+  padding: 16px 8px;
+  text-align: center;
+  text-decoration: none;
+
+  :hover {
+    border-bottom: 2px solid transparent;
+    border-bottom-color: #d1d5da;
+    color: #24292e;
+    transition: 0.2s ease;
+  }
+`

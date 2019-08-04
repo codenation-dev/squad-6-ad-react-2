@@ -1,31 +1,17 @@
 import React from 'react'
-import {
-  DivBox,
-  DivPainned,
-  DivFlex,
-  Span,
-  Description,
-  Linguagem,
-  NameLinguagem,
-  PDate,
-  Div
-} from './styled'
+import { RepositoriesList, Name, Description, Details, Detail } from './style'
 
 export default function Repository ({ repository }) {
   return (
-    <DivBox>
-      <DivPainned>
-        <DivFlex>
-          <Span>{repository.name}</Span>
-        </DivFlex>
-        <Description>{repository.description} </Description>
-        <Div>
-          <Linguagem>
-            <NameLinguagem>{repository.primaryLanguage.name}</NameLinguagem>
-          </Linguagem>
-          <PDate>{new Date(repository.createdAt).toLocaleDateString()}</PDate>
-        </Div>
-      </DivPainned>
-    </DivBox>
+    <RepositoriesList>
+      <Name>{repository.name}</Name>
+      <Description>{repository.description} </Description>
+      <Details>
+        <Detail>{repository.primaryLanguage.name} </Detail>
+        <Detail>
+          Created on {new Date(repository.createdAt).toLocaleDateString()}
+        </Detail>
+      </Details>
+    </RepositoriesList>
   )
 }
