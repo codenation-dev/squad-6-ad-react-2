@@ -21,9 +21,9 @@ export default function Repository ({ repository }) {
         <Description>{repository.description} </Description>
         <Div>
           <Linguagem>
-            <NameLinguagem>{repository.language}</NameLinguagem>
+            <NameLinguagem>{repository.primaryLanguage.name}</NameLinguagem>
           </Linguagem>
-          <PDate>{repository.created_data}</PDate>
+          <PDate>{new Date(repository.createdAt).toLocaleDateString()}</PDate>
         </Div>
       </DivPainned>
     </DivBox>
