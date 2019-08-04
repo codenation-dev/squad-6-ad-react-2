@@ -1,15 +1,17 @@
 import React from 'react'
+import ButtonNew from '../ButtonNew/ButtonNew'
+
 import {
   Container,
-  DivTitle,
   DivBusca,
+  DivTitle,
   Form,
   InputText,
-  SpanButton,
+  Link,
+  Menu,
+  OptionType,
   Repos,
-  H2,
-  SelectType,
-  OptionType
+  SelectType
 } from './style'
 import Repository from '../Repository/Repository'
 
@@ -17,11 +19,18 @@ export default function Repositories ({ language, repositories }) {
   return (
     <Container>
       <DivTitle>
-        <H2>Repositories</H2>
+        <Menu>
+          <Link>Overview</Link>
+          <Link repo>Repositories</Link>
+          <Link>Projects</Link>
+          <Link>Stars</Link>
+          <Link>Followers</Link>
+          <Link>Following</Link>
+        </Menu>
       </DivTitle>
       <DivBusca>
         <Form>
-          <InputText />
+          <InputText placeholder='Find a repository...' />
           <SelectType>
             <OptionType>All</OptionType>
             {language.map(lang => (
@@ -30,7 +39,7 @@ export default function Repositories ({ language, repositories }) {
               </OptionType>
             ))}
           </SelectType>
-          <SpanButton>New</SpanButton>
+          <ButtonNew />
         </Form>
       </DivBusca>
       <Repos>
