@@ -16,7 +16,7 @@ export const DivBusca = styled.div`
   flex-wrap: wrap;
 `
 
-export const Form = styled.form`
+export const Form = styled.main`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
