@@ -17,6 +17,9 @@ import {
 import logo from './assets/logo.svg'
 import slash from './assets/search-key-slash.svg'
 import repository from './assets/repository.svg'
+import { connect } from 'react-redux'
+import { getUserRepositories } from '../../store/ducks/repositories'
+import { bindActionCreators } from 'redux'
 
 function SearchRepositories () {
   return (
@@ -59,9 +62,16 @@ const useFocus = ref => {
   return state
 }
 
-export default function Header () {
-  const ref = useRef()
-  const focused = useFocus(ref)
+function Header ({ getUserRepositories }) {
+  const userSrc = useRef(null)
+  const focused = useFocus(userSrc)
+
+  const searchUserRepos = () => {
+    const login = userSrc.current.value
+    if (!login) return
+
+    getUserRepositories(login)
+  }
 
   return (
     <Head>
@@ -74,7 +84,12 @@ export default function Header () {
       <Div links>
         <Div input className={`app ${focused && 'is-focused'}`}>
           <Label>
-            <Input type='text' ref={ref} placeholder='Search or jump to...' />
+            <Input
+              type='text'
+              ref={userSrc}
+              onKeyUp={e => e.which === 13 && searchUserRepos()}
+              placeholder='Search or jump to...'
+            />
             {!focused && <Img src={slash} alt={'Slash bar'} />}
           </Label>
           {focused && <SearchRepositories />}
@@ -92,3 +107,11 @@ export default function Header () {
     </Head>
   )
 }
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getUserRepositories }, dispatch)
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Header)
