@@ -7,8 +7,10 @@ export default function Repository ({ repository }) {
       <Name>{repository.name}</Name>
       <Description>{repository.description} </Description>
       <Details>
-        <Detail>{repository.language} </Detail>
-        <Detail> Updated on {repository.created_data} </Detail>
+        <Detail>{repository.primaryLanguage.name} </Detail>
+        <Detail>
+          Created on {new Date(repository.createdAt).toLocaleDateString()}
+        </Detail>
       </Details>
     </RepositoriesList>
   )
