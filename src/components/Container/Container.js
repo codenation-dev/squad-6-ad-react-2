@@ -3,11 +3,11 @@ import { Content } from './style'
 import Card from '../Card/Card'
 import Section from '../Section/Section'
 
-export default function Container ({ ...data }) {
+export default function Container () {
   return (
     <Content>
       <Card />
-      <Section {...data} />
+      <Section />
     </Content>
   )
 }

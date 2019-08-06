@@ -1,29 +1,31 @@
 import React from 'react'
-// import { gql } from 'apollo-boost'
-// import { graphql } from 'react-apollo'
+import { connect } from 'react-redux'
 import Main from './components/Main/Main'
-import data from './data/data.json'
-import { BrowserRouter as Router } from 'react-router-dom'
+import NotFound from './components/NotFound/NotFound'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import Header from './components/Header/Header'
 
-// const testQuery = gql`
-//   query {
-//     viewer {
-//       login
-//     }
-//   }
-// `
-
-function App () {
+function App ({ repos, errMsg }) {
   return (
     <div className='App'>
       <Header />
       <Router>
-        <Main {...data} />
+        <Route
+          exact
+          path='/'
+          render={() =>
+            errMsg ? <NotFound msg={errMsg} /> : repos.length ? <Main /> : null
+          }
+        />
       </Router>
     </div>
   )
 }
 
-export default App
+const mapStateToProps = state => ({
+  errMsg: state.user.errMsg,
+  repos: state.user.userRepos
+})
+
+export default connect(mapStateToProps)(App)
