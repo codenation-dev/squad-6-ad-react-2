@@ -18,44 +18,60 @@ import { connect } from 'react-redux'
 
 const filterLanguages = langList => {
   const uniques = []
-  langList.forEach(lang => !uniques.includes(lang) && uniques.push(lang))
+  langList.forEach(
+    lang => lang && !uniques.includes(lang) && uniques.push(lang)
+  )
 
   return uniques
 }
 
 function Repositories ({ userRepos }) {
   const [currentRepoList, setCurrentRepoList] = useState([])
+  const [searchStr, setSearchStr] = useState('')
+  const [lang, setLang] = useState('All')
 
   useEffect(() => {
-    setCurrentRepoList(userRepos)
-  }, [setCurrentRepoList, userRepos])
+    const filterRepos = () => {
+      const newList = userRepos.filter(
+        ({ name, description, primaryLanguage }) => {
+          const lowerCaseSearchStr = searchStr.toLowerCase()
+          const lowerCaseName = name.toLowerCase()
+          const lowerCaseDescription = description && description.toLowerCase()
 
-  const onSearch = event => {
-    const search = event.target.value.toLowerCase()
+          if (!searchStr && lang === 'All') return true
 
-    const filteredRepos = userRepos.filter(({ name, description }) => {
-      const lowerName = name.toLowerCase()
-      const lowerDesc = description && description.toLowerCase()
-      return (
-        lowerName.includes(search) || (lowerDesc && lowerDesc.includes(search))
+          const isLangMatch =
+            lang !== 'All' &&
+            (primaryLanguage.name && primaryLanguage.name === lang)
+
+          if (searchStr) {
+            const isSearchStrMatch =
+              lowerCaseName.includes(lowerCaseSearchStr) ||
+              (!!description &&
+                lowerCaseDescription.includes(lowerCaseSearchStr))
+
+            return isSearchStrMatch && isLangMatch
+          }
+
+          return isLangMatch
+        }
       )
-    })
 
-    setCurrentRepoList(filteredRepos)
-  }
+      setCurrentRepoList(newList)
+    }
 
-  const languages = userRepos.map(({ primaryLanguage }) => primaryLanguage.name)
+    filterRepos()
+  }, [userRepos, setCurrentRepoList, searchStr, lang])
+
+  const onSearch = ({ target }) => setSearchStr(target.value)
+
+  const onLangFilter = ({ target }) => setLang(target.value)
+
+  const languages = userRepos.map(
+    ({ primaryLanguage }) => primaryLanguage && primaryLanguage.name
+  )
 
   const uniqueLanguages = filterLanguages(languages)
-
-  const onLangFilter = event => {
-    const lang = event.target.value
-    const filteredRepos = userRepos.filter(({ primaryLanguage }) => {
-      if (lang === 'All') return true
-      return primaryLanguage.name === lang
-    })
-    setCurrentRepoList(filteredRepos)
-  }
 
   return (
     <Container>
@@ -71,8 +87,12 @@ function Repositories ({ userRepos }) {
       </DivTitle>
       <DivBusca>
         <Form>
-          <InputText onChange={onSearch} placeholder='Find a repository...' />
-          <SelectType onChange={onLangFilter}>
+          <InputText
+            onChange={onSearch}
+            value={searchStr}
+            placeholder='Find a repository...'
+          />
+          <SelectType onChange={onLangFilter} value={lang}>
             <OptionType>All</OptionType>
             {uniqueLanguages.map(langName => (
               <OptionType key={langName} value={langName}>
