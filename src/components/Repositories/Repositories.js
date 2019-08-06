@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ButtonNew from '../ButtonNew/ButtonNew'
 
 import {
@@ -16,7 +16,47 @@ import {
 import Repository from '../Repository/Repository'
 import { connect } from 'react-redux'
 
+const filterLanguages = langList => {
+  const uniques = []
+  langList.forEach(lang => !uniques.includes(lang) && uniques.push(lang))
+
+  return uniques
+}
+
 function Repositories ({ userRepos }) {
+  const [currentRepoList, setCurrentRepoList] = useState([])
+
+  useEffect(() => {
+    setCurrentRepoList(userRepos)
+  }, [setCurrentRepoList, userRepos])
+
+  const onSearch = event => {
+    const search = event.target.value.toLowerCase()
+
+    const filteredRepos = userRepos.filter(({ name, description }) => {
+      const lowerName = name.toLowerCase()
+      const lowerDesc = description && description.toLowerCase()
+      return (
+        lowerName.includes(search) || (lowerDesc && lowerDesc.includes(search))
+      )
+    })
+
+    setCurrentRepoList(filteredRepos)
+  }
+
+  const languages = userRepos.map(({ primaryLanguage }) => primaryLanguage.name)
+
+  const uniqueLanguages = filterLanguages(languages)
+
+  const onLangFilter = event => {
+    const lang = event.target.value
+    const filteredRepos = userRepos.filter(({ primaryLanguage }) => {
+      if (lang === 'All') return true
+      return primaryLanguage.name === lang
+    })
+    setCurrentRepoList(filteredRepos)
+  }
+
   return (
     <Container>
       <DivTitle>
@@ -31,12 +71,12 @@ function Repositories ({ userRepos }) {
       </DivTitle>
       <DivBusca>
         <Form>
-          <InputText placeholder='Find a repository...' />
-          <SelectType>
+          <InputText onChange={onSearch} placeholder='Find a repository...' />
+          <SelectType onChange={onLangFilter}>
             <OptionType>All</OptionType>
-            {userRepos.map(({ id, primaryLanguage }) => (
-              <OptionType key={id} value={id}>
-                {primaryLanguage.name}
+            {uniqueLanguages.map(langName => (
+              <OptionType key={langName} value={langName}>
+                {langName}
               </OptionType>
             ))}
           </SelectType>
@@ -44,7 +84,7 @@ function Repositories ({ userRepos }) {
         </Form>
       </DivBusca>
       <Repos>
-        {userRepos.map(repository => (
+        {currentRepoList.map(repository => (
           <Repository key={repository.id} repository={repository} />
         ))}
       </Repos>
@@ -53,7 +93,7 @@ function Repositories ({ userRepos }) {
 }
 
 const mapStateToProps = state => ({
-  userRepos: state.repositories.userRepos
+  userRepos: state.user.userRepos
 })
 
 export default connect(
