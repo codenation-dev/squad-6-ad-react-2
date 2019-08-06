@@ -1,27 +1,35 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import {
   Avatar,
   DivBlock,
   DivContainer,
-  EditProfile,
   Name,
   Location,
   User,
   Username
 } from './style'
 
-export default function Card () {
+function Card ({ user }) {
   return (
     <DivContainer>
       <DivBlock>
-        <Avatar />
+        <Avatar src={user.avatarUrl} />
         <User>
-          <Name>Jorge da Silva Guimarães</Name>
-          <Username>jorgedasilva</Username>
+          <Name>{user.name}</Name>
+          <Username>{user.login}</Username>
         </User>
-        <EditProfile>Edit profile</EditProfile>
-        <Location>Belém - Pará - Brazil</Location>
+        <Location>{user.location}</Location>
       </DivBlock>
     </DivContainer>
   )
 }
+
+const mapStateToProps = state => ({
+  user: state.user.user
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(Card)
