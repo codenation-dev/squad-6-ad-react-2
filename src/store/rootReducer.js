@@ -1,4 +1,4 @@
 import { combineReducers } from 'redux'
-import repositories from './ducks/repositories'
+import user from './ducks/user'
 
-export default combineReducers({ repositories })
+export default combineReducers({ user })
