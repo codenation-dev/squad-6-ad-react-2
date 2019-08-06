@@ -7,7 +7,9 @@ export default function Repository ({ repository }) {
       <Name>{repository.name}</Name>
       <Description>{repository.description} </Description>
       <Details>
-        <Detail>{repository.primaryLanguage.name} </Detail>
+        <Detail>
+          {repository.primaryLanguage && repository.primaryLanguage.name}{' '}
+        </Detail>
         <Detail>
           Created on {new Date(repository.createdAt).toLocaleDateString()}
         </Detail>
