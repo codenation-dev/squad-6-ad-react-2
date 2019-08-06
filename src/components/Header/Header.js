@@ -18,7 +18,7 @@ import logo from './assets/logo.svg'
 import slash from './assets/search-key-slash.svg'
 import repository from './assets/repository.svg'
 import { connect } from 'react-redux'
-import { getUserRepositories } from '../../store/ducks/repositories'
+import { getUser } from '../../store/ducks/user'
 import { bindActionCreators } from 'redux'
 
 function SearchRepositories () {
@@ -62,15 +62,15 @@ const useFocus = ref => {
   return state
 }
 
-function Header ({ getUserRepositories }) {
+function Header ({ getUser }) {
   const userSrc = useRef(null)
   const focused = useFocus(userSrc)
 
-  const searchUserRepos = () => {
+  const searchUser = () => {
     const login = userSrc.current.value
     if (!login) return
 
-    getUserRepositories(login)
+    getUser(login)
   }
 
   return (
@@ -87,7 +87,7 @@ function Header ({ getUserRepositories }) {
             <Input
               type='text'
               ref={userSrc}
-              onKeyUp={e => e.which === 13 && searchUserRepos()}
+              onKeyUp={e => e.which === 13 && searchUser()}
               placeholder='Search or jump to...'
             />
             {!focused && <Img src={slash} alt={'Slash bar'} />}
@@ -108,8 +108,7 @@ function Header ({ getUserRepositories }) {
   )
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getUserRepositories }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({ getUser }, dispatch)
 
 export default connect(
   null,
