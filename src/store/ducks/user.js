@@ -1,9 +1,7 @@
-import client from '../../services/client'
-import { userQuery } from '../../services/queries'
-
 export const TYPES = {
   FETCH_USER: 'FETCH_USER',
-  FETCH_USER_ERROR: 'FETCH_USER_ERROR'
+  FETCH_USER_ERROR: 'FETCH_USER_ERROR',
+  ASYNC_FETCH_USER: 'ASYNC_FETCH_USER'
 }
 
 const initialState = {
@@ -17,8 +15,7 @@ export default (state = initialState, { type, payload }) => {
     const user = { ...payload }
     delete user.repositories
     const userRepos = [...payload.repositories.nodes]
-    const errMsg = ''
-    return { ...state, user, userRepos, errMsg }
+    return { ...state, user, userRepos }
   }
 
   if (type === TYPES.FETCH_USER_ERROR) return { ...state, errMsg: payload }
@@ -26,18 +23,12 @@ export default (state = initialState, { type, payload }) => {
   return state
 }
 
-export const getUser = login => dispatch =>
-  client
-    .query({ query: userQuery, variables: { login } })
-    .then(({ data }) =>
-      dispatch({
-        type: TYPES.FETCH_USER,
-        payload: data.user
-      })
-    )
-    .catch(() =>
-      dispatch({
-        type: TYPES.FETCH_USER_ERROR,
-        payload: 'User not found'
-      })
-    )
+export const getUser = login => ({
+  type: TYPES.ASYNC_FETCH_USER,
+  payload: login
+})
+
+export const reciveUser = user => ({
+  type: TYPES.FETCH_USER,
+  payload: user.user
+})

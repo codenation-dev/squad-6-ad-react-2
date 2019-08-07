@@ -41,9 +41,9 @@ function Repositories ({ userRepos }) {
           if (!searchStr && lang === 'All') return true
 
           const isLangMatch =
-            lang !== 'All' &&
-            (primaryLanguage.name && primaryLanguage.name === lang)
-
+            lang === 'All' ||
+            (lang !== 'All' &&
+              (primaryLanguage.name && primaryLanguage.name === lang))
           if (searchStr) {
             const isSearchStrMatch =
               lowerCaseName.includes(lowerCaseSearchStr) ||
