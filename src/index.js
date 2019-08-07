@@ -8,7 +8,7 @@ import { ApolloProvider } from 'react-apollo'
 import client from './services/client'
 import './reset.css'
 import App from './App'
-import rootSaga from './store/ducks/sagas'
+import rootSaga from './store/sagas/user'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const sagaMiddleware = createSagaMiddleware()
