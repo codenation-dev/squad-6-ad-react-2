@@ -15,7 +15,7 @@ export default (state = initialState, { type, payload }) => {
     const user = { ...payload }
     delete user.repositories
     const userRepos = [...payload.repositories.nodes]
-    return { ...state, user, userRepos }
+    return { user, userRepos, errMsg: '' }
   }
 
   if (type === TYPES.FETCH_USER_ERROR) return { ...state, errMsg: payload }
