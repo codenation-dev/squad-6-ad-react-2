@@ -6,6 +6,11 @@ import { userQuery } from '../../services/queries'
 function * getApiData ({ payload }) {
   const login = payload
   try {
+    yield put({
+      type: TYPES.LOADING_USER,
+      payload: { isLoading: true }
+    })
+
     const data = yield call(() =>
       client
         .query({ query: userQuery, variables: { login } })
