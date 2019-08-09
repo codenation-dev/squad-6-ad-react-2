@@ -10,7 +10,7 @@ import Header from './components/Header/Header'
 
 function App ({ repos, errMsg, isLoading }) {
   return (
-    <div className='App'>
+    <>
       <Header />
       <Router>
         <Route
@@ -29,7 +29,7 @@ function App ({ repos, errMsg, isLoading }) {
           }
         />
       </Router>
-    </div>
+    </>
   )
 }
 
