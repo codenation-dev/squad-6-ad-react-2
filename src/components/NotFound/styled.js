@@ -4,7 +4,7 @@ export const DivContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px;
-  margin: 20px;
+  margin: 20%;
 `
 
 export const H1 = styled.h1`
