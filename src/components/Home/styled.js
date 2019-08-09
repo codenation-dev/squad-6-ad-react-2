@@ -3,8 +3,8 @@ import styled from 'styled-components'
 export const DivContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 10px;
-  margin-top: 20%;
+  align-items: center;
+  height: calc(100vh - 69px);
 `
 
 export const PTexto = styled.p`
