@@ -1,13 +1,15 @@
 export const TYPES = {
   FETCH_USER: 'FETCH_USER',
   FETCH_USER_ERROR: 'FETCH_USER_ERROR',
-  ASYNC_FETCH_USER: 'ASYNC_FETCH_USER'
+  ASYNC_FETCH_USER: 'ASYNC_FETCH_USER',
+  LOADING_USER: 'LOADING_USER'
 }
 
 const initialState = {
   user: {},
   userRepos: [],
-  errMsg: ''
+  errMsg: '',
+  isLoading: false
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -15,10 +17,14 @@ export default (state = initialState, { type, payload }) => {
     const user = { ...payload }
     delete user.repositories
     const userRepos = [...payload.repositories.nodes]
-    return { user, userRepos, errMsg: '' }
+    return { user, userRepos, errMsg: '', isLoading: false }
   }
 
   if (type === TYPES.FETCH_USER_ERROR) return { ...state, errMsg: payload }
+
+  if (type === TYPES.LOADING_USER) {
+    return { ...state, isLoading: payload.isLoading }
+  }
 
   return state
 }
