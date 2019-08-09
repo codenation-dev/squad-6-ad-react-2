@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-
+import ButtonNew from '../ButtonNew/ButtonNew'
 import {
   // Anchor,
-  ButtonNew,
   Div,
   Head,
   Img,
@@ -102,9 +101,7 @@ function Header ({ getUser }) {
         <MenuLink>Explore</MenuLink>
       </Div>
 
-      <ButtonNew type='button'>
-        <Img src={repository} /> New
-      </ButtonNew>
+      <ButtonNew />
     </Head>
   )
 }
