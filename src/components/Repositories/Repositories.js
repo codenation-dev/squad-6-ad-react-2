@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import ButtonNew from '../ButtonNew/ButtonNew'
+// import ButtonNew from '../ButtonNew/ButtonNew'
 
 import {
   Container,
@@ -77,12 +77,12 @@ function Repositories ({ userRepos }) {
     <Container>
       <DivTitle>
         <Menu>
-          <Link>Overview</Link>
+          {/* <Link>Overview</Link> */}
           <Link repo>Repositories</Link>
-          <Link>Projects</Link>
+          {/* <Link>Projects</Link>
           <Link>Stars</Link>
           <Link>Followers</Link>
-          <Link>Following</Link>
+          <Link>Following</Link> */}
         </Menu>
       </DivTitle>
       <DivBusca>
@@ -100,7 +100,7 @@ function Repositories ({ userRepos }) {
               </OptionType>
             ))}
           </SelectType>
-          <ButtonNew />
+          {/* <ButtonNew /> */}
         </Form>
       </DivBusca>
       <Repos>

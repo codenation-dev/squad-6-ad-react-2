@@ -35,15 +35,15 @@ const Card = memo(({ user, repos }) => {
         </User>
         <Location>{user.location}</Location>
         {/************** TODO: view for repos per year **************/}
-        {Object.entries(reposPerYear).map(([year, count]) => (
-          <ul key={year}>
-            <li>
+        <ul style={{ marginTop: 20, listStyle: 'none' }}>
+          {Object.entries(reposPerYear).map(([year, count]) => (
+            <li key={year}>
               <span>
                 <strong>{year}</strong> - {count} <span>repositories</span>
               </span>
             </li>
-          </ul>
-        ))}
+          ))}
+        </ul>
       </DivBlock>
     </DivContainer>
   )

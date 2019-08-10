@@ -2,21 +2,21 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import {
   // Anchor,
-  ButtonNew,
+  // ButtonNew,
   Div,
   Head,
   Img,
   Input,
-  Label,
+  Label
   // Li,
-  MenuLink
+  // MenuLink
   // Span,
   // Ul
 } from './styles'
 
 import logo from './assets/logo.svg'
 import slash from './assets/search-key-slash.svg'
-import repository from './assets/repository.svg'
+// import repository from './assets/repository.svg'
 import { connect } from 'react-redux'
 import { getUser } from '../../store/ducks/user'
 import { bindActionCreators } from 'redux'
@@ -77,9 +77,9 @@ function Header ({ getUser }) {
   return (
     <Head>
       <Div>
-        <MenuLink href='#'>
-          <Img logo src={logo} alt={'Github logo'} />
-        </MenuLink>
+        {/* <MenuLink href='#'> */}
+        <Img logo src={logo} alt={'Github logo'} />
+        {/* </MenuLink> */}
       </Div>
 
       <Div links>
@@ -96,15 +96,15 @@ function Header ({ getUser }) {
           {/* {focused && <SearchRepositories />} */}
         </Div>
 
-        <MenuLink>Pull Requests</MenuLink>
+        {/* <MenuLink>Pull Requests</MenuLink>
         <MenuLink>Issues</MenuLink>
         <MenuLink>Marketplace</MenuLink>
-        <MenuLink>Explore</MenuLink>
+        <MenuLink>Explore</MenuLink> */}
       </Div>
 
-      <ButtonNew type='button'>
+      {/* <ButtonNew type='button'>
         <Img src={repository} /> New
-      </ButtonNew>
+      </ButtonNew> */}
     </Head>
   )
 }
