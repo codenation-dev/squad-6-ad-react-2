@@ -27,6 +27,7 @@ export const Description = styled.p`
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   margin-bottom: 8px;
+  max-width: 600px;
 `
 
 export const Details = styled.div`
