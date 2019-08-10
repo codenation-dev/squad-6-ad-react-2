@@ -26,7 +26,6 @@ export const User = styled.div`
   display: block;
   padding: 10px 0;
 `
-
 export const Name = styled.p`
   border-radius: 3px;
   color: #24292e;
@@ -85,4 +84,13 @@ export const EditProfile = styled.span`
     background-position: -0.5em;
     border-color: rgba(27, 31, 35, 0.35);
   }
+`
+
+export const CountRepos = styled.h3`
+  color: #24292e;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 18px 0 10px 0;
+  text-align: center;
 `

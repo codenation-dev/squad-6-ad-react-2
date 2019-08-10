@@ -1,7 +1,9 @@
 import React, { memo, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import Badge from '../Badge/Badge'
 import {
   Avatar,
+  CountRepos,
   DivBlock,
   DivContainer,
   Name,
@@ -35,15 +37,17 @@ const Card = memo(({ user, repos }) => {
         </User>
         <Location>{user.location}</Location>
         {/************** TODO: view for repos per year **************/}
-        <ul style={{ marginTop: 20, listStyle: 'none' }}>
+        <DivBlock>
+          <CountRepos>Number of repositories per year</CountRepos>
           {Object.entries(reposPerYear).map(([year, count]) => (
-            <li key={year}>
-              <span>
-                <strong>{year}</strong> - {count} <span>repositories</span>
-              </span>
-            </li>
+            <Badge year={year} count={count} />
+            // <li key={year}>
+            //   <span>
+            //     <strong>{year}</strong> - {count} <span>repositories</span>
+            //   </span>
+            // </li>
           ))}
-        </ul>
+        </DivBlock>
       </DivBlock>
     </DivContainer>
   )
