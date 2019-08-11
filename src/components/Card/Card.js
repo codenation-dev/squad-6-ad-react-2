@@ -40,12 +40,7 @@ const Card = memo(({ user, repos }) => {
         <DivBlock>
           <CountRepos>Number of repositories per year</CountRepos>
           {Object.entries(reposPerYear).map(([year, count]) => (
-            <Badge year={year} count={count} />
-            // <li key={year}>
-            //   <span>
-            //     <strong>{year}</strong> - {count} <span>repositories</span>
-            //   </span>
-            // </li>
+            <Badge key={year} year={year} count={count} />
           ))}
         </DivBlock>
       </DivBlock>

@@ -21,7 +21,7 @@ function App ({ repos, errMsg, isLoading }) {
               <NotFound msg={errMsg} />
             ) : isLoading ? (
               <Loading />
-            ) : repos.length ? (
+            ) : repos ? (
               <Main />
             ) : (
               <Home />
