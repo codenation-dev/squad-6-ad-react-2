@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import ButtonNew from '../ButtonNew/ButtonNew'
+// import ButtonNew from '../ButtonNew/ButtonNew'
 import {
   // Anchor,
   Div,
@@ -100,7 +100,7 @@ function Header ({ getUser }) {
         <MenuLink>Marketplace</MenuLink>
         <MenuLink>Explore</MenuLink> */}
       </Div>
-      <ButtonNew />
+      {/* <ButtonNew /> */}
     </Head>
   )
 }
