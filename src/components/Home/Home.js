@@ -4,7 +4,7 @@ import { DivContainer, PTexto } from './styled'
 export default function Home () {
   return (
     <DivContainer>
-      <PTexto>Explore public repositories</PTexto>
+      <PTexto data-testid='home'>Explore public repositories</PTexto>
     </DivContainer>
   )
 }

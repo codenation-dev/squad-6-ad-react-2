@@ -5,9 +5,9 @@ export const TYPES = {
   LOADING_USER: 'LOADING_USER'
 }
 
-const initialState = {
+export const initialState = {
   user: {},
-  userRepos: [],
+  userRepos: null,
   errMsg: '',
   isLoading: false
 }
